@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grievance Results</title>
+</head>
+<body>
+    <h1>Grievance Submission Results</h1>
+    <h3>Your Submitted Grievance:</h3>
+    <p>{{ new_text }}</p>
+    
+    {% if similar_grievances %}
+        <h3>Similar Grievances Found:</h3>
+        <ul>
+        {% for g in similar_grievances %}
+            <li>
+                <strong>{{ g.title }}</strong><br>
+                {{ g.description }}<br>
+                <em>Location:</em> {{ g.location }} | <em>Category:</em> {{ g.category }}
+            </li>
+        {% endfor %}
+        </ul>
+        <p>If your grievance is similar to one above, consider <strong>joining the existing complaint</strong>.</p>
+    {% else %}
+        <p>No similar grievances found. You may submit this as a new grievance.</p>
+    {% endif %}
+    
+    <!-- Form to simulate final submission -->
+    <form method="post" action="/submit">
+        <input type="hidden" name="grievance_text" value="{{ new_text }}">
+        <input type="submit" value="Submit New Grievance">
+    </form>
+</body>
+</html>
